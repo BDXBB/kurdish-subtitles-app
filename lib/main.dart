@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'pages.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -36,7 +38,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      // title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
@@ -58,9 +61,43 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
 
+  Widget currnetpage = Test();
 
+switch (selectindex) {
+      case 0:
+      currnetpage = homepage();
+        break;
+      case 1:
+      currnetpage = tappage();
+        break;
+      case 2:
+      currnetpage = settingspage();
+        break;
+    }
     return Scaffold(
-
+      backgroundColor: Colors.grey[100],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: selectindex,
+        onTap: (index) {
+          setState(() {
+          selectindex = index;
+        });
+        },
+        items: [
+        BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.layers),
+            label: 'Tabs',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
+      ),
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
         // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
@@ -70,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Test(), // This trailing comma makes auto-formatting nicer for build methods.
+      body: currnetpage, // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
