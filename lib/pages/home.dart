@@ -1,9 +1,15 @@
+import 'package:Kurdish_Sbtitles/pages/settings.dart';
 import 'package:flutter/material.dart';
 
 
-class homepage extends StatelessWidget {
+class homepage extends StatefulWidget {
   const homepage({super.key});
 
+  @override
+  State<homepage> createState() => _homepageState();
+}
+
+class _homepageState extends State<homepage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(child:
@@ -33,7 +39,7 @@ class homepage extends StatelessWidget {
             child: TextField(
               decoration: InputDecoration(
                 border: InputBorder.none,
-                hintText: "Search",
+                hintText: "Search in google",
                 prefixIcon: Icon(Icons.search),
                 contentPadding: EdgeInsets.all(15)
 
@@ -41,15 +47,26 @@ class homepage extends StatelessWidget {
             ),
           ),
          actions: [
-    IconButton(
+    PopupMenuButton<int>(
       icon: const Icon(Icons.settings),
-      onPressed: () {
+      onSelected: (value) {
+        if (value == 1) {
+          // Navigate to settings page
+        }
+        // settingspage();
       },
-    ),
+      itemBuilder: (context) => [
+        const PopupMenuItem(value: 1,
+        child: SizedBox(
+          width: 100,
+          child: Text("Settings"),
+          ),
+
+               )
   ],
       ),
-
-
+          ],
+        ),
 
   const SizedBox(height: 24.0),
 
@@ -150,12 +167,31 @@ class homepage extends StatelessWidget {
 
         )
         ),
-        // Container(
-        //   decoration: BoxDecoration(
-        //     borderRadius: BorderRadius.circular(15),
-        //     color: Colors.orange,
-        //   ),
-        // ),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            color: Colors.orange,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.add_circle,
+                size: 100,
+                color: Color.fromARGB(255, 92, 2, 148),
+              ),
+              SizedBox(height: 10),
+              Text(
+                "More ?",
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
       ),
   )
